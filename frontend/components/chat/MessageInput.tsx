@@ -1,7 +1,18 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Smile, Paperclip, SendHorizontal } from "lucide-react";
+import {
+  useRef,
+  useState,
+  useEffect,
+} from "react";
+
+import {
+  Smile,
+  Paperclip,
+  SendHorizontal,
+} from "lucide-react";
+
+import EmojiPicker from "emoji-picker-react";
 
 import { sendMessage } from "@/lib/api";
 import { getSocket } from "@/lib/socket";
@@ -15,12 +26,44 @@ export default function MessageInput({
   conversationId,
 }: Props) {
   const [text, setText] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] =
+    useState(false);
 
   const currentUser = useUserStore(
     (state) => state.user
   );
 
-  const typingTimeout = useRef<NodeJS.Timeout | null>(null);
+  const typingTimeout =
+    useRef<NodeJS.Timeout | null>(null);
+
+  const pickerRef =
+    useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(
+      event: MouseEvent
+    ) {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(
+          event.target as Node
+        )
+      ) {
+        setShowEmojiPicker(false);
+      }
+    }
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () =>
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+  }, []);
 
   async function handleSend() {
     if (!conversationId) return;
@@ -28,7 +71,10 @@ export default function MessageInput({
     if (!text.trim()) return;
 
     try {
-      await sendMessage(conversationId, text);
+      await sendMessage(
+        conversationId,
+        text
+      );
 
       setText("");
 
@@ -71,30 +117,74 @@ export default function MessageInput({
     );
 
     if (typingTimeout.current) {
-      clearTimeout(typingTimeout.current);
+      clearTimeout(
+        typingTimeout.current
+      );
     }
 
-    typingTimeout.current = setTimeout(() => {
-      socket?.send(
-        JSON.stringify({
-          type: "stop_typing",
-          conversation_id: conversationId,
-          user_id: currentUser?.id,
-        })
-      );
-    }, 1000);
+    typingTimeout.current =
+      setTimeout(() => {
+        socket?.send(
+          JSON.stringify({
+            type: "stop_typing",
+            conversation_id:
+              conversationId,
+            user_id: currentUser?.id,
+          })
+        );
+      }, 1000);
   }
 
   return (
-    <div className="bg-white border-t px-5 py-4 flex items-center gap-4">
+    <div className="relative bg-white border-t px-5 py-4 flex items-center gap-4">
 
-      <Smile size={22} />
+      <div
+        className="relative"
+        ref={pickerRef}
+      >
+        <Smile
+          size={22}
+          className="cursor-pointer hover:text-yellow-500"
+          onClick={() =>
+            setShowEmojiPicker(
+              (prev) => !prev
+            )
+          }
+        />
 
-      <Paperclip size={22} />
+        {showEmojiPicker && (
+          <div className="absolute bottom-12 left-0 z-50 shadow-xl">
+            <EmojiPicker
+              onEmojiClick={(
+                emojiData
+              ) => {
+                setText(
+                  (prev) =>
+                    prev +
+                    emojiData.emoji
+                );
+
+                setShowEmojiPicker(false);
+              }}
+              width={320}
+              height={400}
+            />
+          </div>
+        )}
+      </div>
+
+      <Paperclip
+        size={22}
+        className="cursor-pointer"
+      />
 
       <input
         value={text}
-        onChange={(e) => handleTyping(e.target.value)}
+        onChange={(e) =>
+          handleTyping(
+            e.target.value
+          )
+        }
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
         className="flex-1 bg-gray-100 rounded-full px-5 py-3 outline-none"
@@ -102,9 +192,11 @@ export default function MessageInput({
 
       <button
         onClick={handleSend}
-        className="bg-[#3A76F0] p-3 rounded-full text-white"
+        className="bg-[#3A76F0] p-3 rounded-full text-white hover:bg-[#2f66d0]"
       >
-        <SendHorizontal size={18} />
+        <SendHorizontal
+          size={18}
+        />
       </button>
 
     </div>
