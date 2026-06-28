@@ -60,7 +60,7 @@ export default function RegisterPage() {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
 
-      <div className="bg-white p-8 rounded-xl shadow w-96">
+      <div className="bg-white dark:bg-[#202c33] p-8 rounded-xl shadow w-96">
 
         <h1 className="text-2xl font-bold mb-6">
           Create Account
@@ -69,7 +69,7 @@ export default function RegisterPage() {
         {!otpSent && (
           <>
             <input
-              className="border w-full p-3 rounded mb-6"
+              className="border dark:border-[#2a3942] w-full p-3 rounded mb-6"
               placeholder="Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -86,12 +86,12 @@ export default function RegisterPage() {
 
         {otpSent && !verified && (
           <>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               Mock OTP: Enter any 6 digits
             </p>
 
             <input
-              className="border w-full p-3 rounded mb-6 text-center tracking-[8px]"
+              className="border dark:border-[#2a3942] w-full p-3 rounded mb-6 text-center tracking-[8px]"
               placeholder="123456"
               maxLength={6}
               value={otp}

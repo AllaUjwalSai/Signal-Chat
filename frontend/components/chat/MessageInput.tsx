@@ -136,7 +136,7 @@ export default function MessageInput({
   }
 
   return (
-    <div className="relative bg-white border-t px-5 py-4 flex items-center gap-4">
+    <div className="relative bg-white dark:bg-[#202c33] border-t dark:border-[#2a3942] px-5 py-4 flex items-center gap-4">
 
       <div
         className="relative"
@@ -187,7 +187,19 @@ export default function MessageInput({
         }
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
-        className="flex-1 bg-gray-100 rounded-full px-5 py-3 outline-none"
+        className="
+            flex-1
+            rounded-full
+            px-5
+            py-3
+            outline-none
+            bg-gray-100
+            dark:bg-[#2a3942]
+            text-black
+            dark:text-white
+            placeholder:text-gray-500
+            dark:placeholder:text-gray-400
+          "
       />
 
       <button

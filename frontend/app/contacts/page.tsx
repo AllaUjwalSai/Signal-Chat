@@ -65,13 +65,13 @@ export default function ContactsPage() {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      <div className="bg-white border-b shadow-sm">
+      <div className="bg-white dark:bg-[#202c33] border-b dark:border-[#2a3942] shadow-sm">
 
         <div className="max-w-3xl mx-auto flex items-center gap-3 p-4">
 
           <button
             onClick={() => router.push("/")}
-            className="p-2 rounded-full hover:bg-gray-100 transition"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#2a3942] transition"
           >
             <ArrowLeft size={22} />
           </button>
@@ -92,7 +92,7 @@ export default function ContactsPage() {
           onChange={(e) =>
             setSearch(e.target.value)
           }
-          className="w-full p-3 rounded-xl border mb-6"
+          className="w-full p-3 rounded-xl border dark:border-[#2a3942] mb-6"
         />
 
         <div
@@ -126,7 +126,7 @@ export default function ContactsPage() {
 
             <div
               key={user.id}
-              className="bg-white rounded-xl p-5 flex justify-between items-center shadow"
+              className="bg-white dark:bg-[#202c33] rounded-xl p-5 flex justify-between items-center shadow"
             >
 
               <div className="flex items-center gap-4">
@@ -149,7 +149,7 @@ export default function ContactsPage() {
                     {user.display_name}
                   </h2>
 
-                  <p className="text-gray-500">
+                  <p className="text-gray-500 dark:text-gray-400">
                     @{user.username}
                   </p>
 

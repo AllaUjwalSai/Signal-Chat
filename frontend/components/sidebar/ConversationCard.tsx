@@ -62,7 +62,7 @@ export default function ConversationCard({
           is_group: isGroup,
         });
       }}
-      className="flex items-center justify-between px-4 py-3 hover:bg-[#f4f4f4] cursor-pointer transition border-b border-gray-100"
+      className="flex items-center justify-between px-4 py-3 hover:bg-[#f4f4f4] cursor-pointer transition border-b dark:border-[#2a3942]"
     >
       <div className="flex items-center gap-3">
 
@@ -81,7 +81,7 @@ export default function ConversationCard({
           />
 
           {online && (
-            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-white" />
+            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-white dark:border-[#2a3942]" />
           )}
 
         </div>
@@ -92,7 +92,7 @@ export default function ConversationCard({
             {name}
           </h2>
 
-          <div className="flex items-center gap-1 text-sm text-gray-500">
+          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
 
             <CheckCheck
               size={14}
@@ -118,7 +118,7 @@ export default function ConversationCard({
 
       <div className="text-right">
 
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
           {time}
         </p>
 

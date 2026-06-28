@@ -3,6 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 
 import {
+  useTheme,
+} from "@/components/providers/ThemeProvider";
+
+import {
   Phone,
   Video,
   MoreVertical,
@@ -55,6 +59,11 @@ export default function ChatHeader({
         ? state.online[conversation.user_id]
         : false
   );
+
+  const {
+  theme,
+  toggleTheme,
+} = useTheme();
 
   const [open, setOpen] = useState(false);
 
@@ -175,7 +184,7 @@ export default function ChatHeader({
   }
 
   return (
-  <header className="h-20 bg-white border-b flex items-center justify-between px-6">
+  <header className="h-20 bg-white dark:bg-[#202c33] border-b dark:border-[#2a3942] flex items-center justify-between px-6">
 
     <div className="flex items-center gap-3">
 
@@ -193,7 +202,7 @@ export default function ChatHeader({
         {!conversation?.is_group &&
           conversation?.user_id &&
           online && (
-            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-white" />
+            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border dark:border-[#2a3942] border-white" />
           )}
 
       </div>
@@ -230,7 +239,7 @@ export default function ChatHeader({
           className={`text-sm ${
             typing
               ? "text-green-600"
-              : "text-gray-500"
+              : "text-gray-500 dark:text-gray-400"
           }`}
         >
           {!conversation
@@ -246,15 +255,15 @@ export default function ChatHeader({
 
         {membersOpen && (
 
-          <div className="absolute top-14 left-0 w-72 bg-white rounded-xl border shadow-xl z-50 overflow-hidden">
+          <div className="absolute top-14 left-0 w-72 bg-white dark:bg-[#202c33] rounded-xl border dark:border-[#2a3942] shadow-xl z-50 overflow-hidden">
 
-            <div className="px-4 py-3 font-semibold border-b">
+            <div className="px-4 py-3 font-semibold border-b dark:border-[#2a3942]">
               Group Members
             </div>
 
             {members.length === 0 && (
 
-              <div className="p-4 text-gray-500">
+              <div className="p-4 text-gray-500 dark:text-gray-400">
                 No members
               </div>
 
@@ -263,7 +272,7 @@ export default function ChatHeader({
             {members.map((member) => (
   <div
     key={member.user_id}
-    className="flex items-center justify-between px-4 py-3 border-b hover:bg-gray-50"
+    className="flex items-center justify-between px-4 py-3 border-b dark:border-[#2a3942] hover:bg-gray-50 dark:hover:bg-[#2a3942]"
   >
     <div className="flex items-center gap-3">
       <img
@@ -283,7 +292,7 @@ export default function ChatHeader({
           {member.display_name}
         </p>
 
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
           @{member.username}
         </p>
       </div>
@@ -300,7 +309,7 @@ export default function ChatHeader({
   </div>
 ))}
 
-<div className="p-3 border-t">
+<div className="p-3 border-t dark:border-[#2a3942]">
   <button
     onClick={handleAddMember}
     className="w-full bg-[#3A76F0] text-white py-2 rounded-lg hover:bg-[#2f66d0]"
@@ -339,9 +348,9 @@ export default function ChatHeader({
 
         <div
           ref={menuRef}
-          className="absolute top-10 right-0 w-72 bg-white rounded-xl shadow-xl border z-50 overflow-hidden"
+          className="absolute top-10 right-0 w-72 bg-white dark:bg-[#202c33] rounded-xl shadow-xl border dark:border-[#2a3942] z-50 overflow-hidden"
         >
-                    <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
+                    <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#2a3942] transition">
             <div className="flex items-center gap-3">
               <User size={18} />
               Profile
@@ -352,7 +361,7 @@ export default function ChatHeader({
             </span>
           </button>
 
-          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
+          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#2a3942] transition">
             <div className="flex items-center gap-3">
               <Settings size={18} />
               Settings
@@ -363,7 +372,7 @@ export default function ChatHeader({
             </span>
           </button>
 
-          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
+          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#2a3942] transition">
             <div className="flex items-center gap-3">
               <Shield size={18} />
               Privacy
@@ -374,29 +383,23 @@ export default function ChatHeader({
             </span>
           </button>
 
-          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
-            <div className="flex items-center gap-3">
-              <Bell size={18} />
-              Notifications
-            </div>
-
-            <span className="text-xs text-gray-400">
-              Coming Soon
-            </span>
-          </button>
-
-          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
+          <button
+            onClick={toggleTheme}
+            className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#2a3942] transition"
+          >
             <div className="flex items-center gap-3">
               <Palette size={18} />
               Appearance
             </div>
 
             <span className="text-xs text-gray-400">
-              Coming Soon
+              {theme === "dark"
+                ? "Dark"
+                : "Light"}
             </span>
           </button>
 
-          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 transition">
+          <button className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#2a3942] transition">
             <div className="flex items-center gap-3">
               <Smartphone size={18} />
               Linked Devices

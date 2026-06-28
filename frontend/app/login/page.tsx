@@ -41,14 +41,14 @@ export default function LoginPage() {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
 
-      <div className="bg-white p-8 rounded-xl shadow w-96">
+      <div className="bg-white dark:bg-[#202c33] p-8 rounded-xl shadow w-96">
 
         <h1 className="text-2xl font-bold text-center mb-6">
           Signal Login
         </h1>
 
         <input
-          className="border w-full p-3 rounded mb-4"
+          className="border dark:border-[#2a3942] w-full p-3 rounded mb-4"
           placeholder="Username"
           value={username}
           onChange={(e) =>
@@ -58,7 +58,7 @@ export default function LoginPage() {
 
         <input
           type="password"
-          className="border w-full p-3 rounded mb-6"
+          className="border dark:border-[#2a3942] w-full p-3 rounded mb-6"
           placeholder="Password"
           value={password}
           onChange={(e) =>

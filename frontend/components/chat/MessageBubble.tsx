@@ -45,8 +45,8 @@ export default function MessageBubble({
     <div
       className={`relative group max-w-md px-4 py-3 rounded-2xl shadow ${
         mine
-          ? "bg-[#DCF8C6] self-end"
-          : "bg-white self-start"
+          ? "bg-[#DCF8C6] dark:bg-[#005C4B] text-black dark:text-white self-end"
+          : "bg-white dark:bg-[#26343D] self-start"
       }`}
     >
       {mine && (
@@ -61,10 +61,10 @@ export default function MessageBubble({
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-8 bg-white rounded-lg shadow-lg border z-50 overflow-hidden">
+            <div className="absolute right-0 top-8 bg-white dark:bg-[#202c33] rounded-lg shadow-lg border-b dark:border-[#2a3942] z-50 overflow-hidden">
               <button
                 onClick={handleDelete}
-                className="block w-full px-4 py-2 text-left text-red-600 hover:bg-red-50"
+                className="block w-full px-4 py-2 text-left text-red-600 hover:bg-red-50 dark:hover:bg-[#2a3942]"
               >
                 Delete
               </button>
@@ -74,7 +74,7 @@ export default function MessageBubble({
       )}
 
       {!mine && senderName && (
-        <p className="text-[10px] text-gray-400 mb-1 font-medium">
+        <p className="text-[10px] text-gray-400 dark:text-gray-400 mb-1 font-medium">
           {senderName}
         </p>
       )}
@@ -83,7 +83,7 @@ export default function MessageBubble({
         {text}
       </p>
 
-      <div className="flex justify-end items-center gap-1 mt-2 text-xs text-gray-500">
+      <div className="flex justify-end items-center gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
 
         <span>
           {createdAt

@@ -64,13 +64,13 @@ export default function GroupsPage() {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      <div className="bg-white border-b shadow-sm">
+      <div className="bg-white dark:bg-[#202c33] border-b dark:border-[#2a3942] shadow-sm">
 
         <div className="max-w-3xl mx-auto flex items-center gap-3 p-4">
 
           <button
             onClick={() => router.push("/")}
-            className="p-2 rounded-full hover:bg-gray-100 transition"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#2a3942] transition"
           >
             <ArrowLeft size={22} />
           </button>
@@ -91,10 +91,10 @@ export default function GroupsPage() {
             setGroupName(e.target.value)
           }
           placeholder="Group Name"
-          className="w-full p-3 rounded-xl border mb-8"
+          className="w-full p-3 rounded-xl border dark:border-[#2a3942] mb-8"
         />
 
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-white dark:bg-[#202c33] rounded-xl shadow">
 
           {users.map((user) => (
 
@@ -119,7 +119,7 @@ export default function GroupsPage() {
                     {user.display_name}
                   </p>
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     @{user.username}
                   </p>
 

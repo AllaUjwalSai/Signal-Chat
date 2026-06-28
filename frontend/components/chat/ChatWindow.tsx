@@ -113,8 +113,8 @@ export default function ChatWindow() {
 
   if (!conversation) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-[#efeae2]">
-        <p className="text-gray-500 text-lg">
+      <div className="flex-1 flex items-center justify-center bg-[#efeae2] dark:bg-[#0b141a]">
+        <p className="text-gray-500 dark:text-gray-400 text-lg">
           Select a conversation
         </p>
       </div>
@@ -122,7 +122,7 @@ export default function ChatWindow() {
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-[#efeae2]">
+    <div className="flex-1 flex flex-col bg-[#efeae2] dark:bg-[#0b141a]">
 
       <ChatHeader
         typing={typing[conversation.id] ?? false}

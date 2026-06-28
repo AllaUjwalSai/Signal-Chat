@@ -84,7 +84,7 @@ export default function Sidebar() {
   );
 
   return (
-    <aside className="w-[370px] bg-white border-r flex flex-col">
+    <aside className="w-[370px] bg-white dark:bg-[#202c33] border dark:border-[#2a3942] flex flex-col">
 
       {/* Header */}
 
@@ -94,7 +94,7 @@ export default function Sidebar() {
           Signal
         </h1>
 
-        <button className="rounded-full p-2 hover:bg-gray-100">
+        <button className="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-[#2a3942]">
           ✏️
         </button>
 
@@ -130,7 +130,24 @@ export default function Sidebar() {
           onChange={(e) =>
             setSearch(e.target.value)
           }
-          className="w-full rounded-xl bg-gray-100 px-4 py-3 outline-none"
+          className="
+            w-full
+            rounded-xl
+            px-4
+            py-3
+            outline-none
+            bg-gray-100
+            dark:bg-[#2a3942]
+            text-black
+            dark:text-white
+            placeholder:text-gray-500
+            dark:placeholder:text-gray-400
+            border
+            border-transparent
+            dark:border-[#3b4a54]
+            focus:ring-2
+            focus:ring-[#3A76F0]
+          "
         />
 
       </div>
@@ -141,7 +158,7 @@ export default function Sidebar() {
 
         {filteredChats.length === 0 ? (
 
-          <div className="text-center text-gray-500 mt-10">
+          <div className="text-center text-gray-500 dark:text-gray-400 mt-10">
             No conversations found
           </div>
 
