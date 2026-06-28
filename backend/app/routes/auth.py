@@ -33,16 +33,30 @@ def register(
     db: Session = Depends(get_db),
 ):
 
-    existing = (
+    # Check if username already exists
+    existing_username = (
         db.query(User)
         .filter(User.username == user.username)
         .first()
     )
 
-    if existing:
+    if existing_username:
         raise HTTPException(
             status_code=400,
             detail="Username already exists",
+        )
+
+    # Check if phone already exists
+    existing_phone = (
+        db.query(User)
+        .filter(User.phone == user.phone)
+        .first()
+    )
+
+    if existing_phone:
+        raise HTTPException(
+            status_code=400,
+            detail="Phone number already exists",
         )
 
     db_user = User(
