@@ -88,9 +88,12 @@ export const markAsDelivered = async (
 export const markAsRead = async (
   messageId: number
 ) => {
+  console.log("📖 Marking as read:", messageId);
   const res = await api.post("/message/read", {
     message_id: messageId,
   });
+
+  console.log("📖 Marking as read:", messageId);
 
   return res.data;
 };

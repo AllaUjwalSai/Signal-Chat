@@ -12,6 +12,11 @@ import { useMessageStore } from "@/store/messageStore";
 import { useUserStore } from "@/store/userStore";
 import { usePresenceStore } from "@/store/presenceStore";
 
+import {
+  markAsDelivered,
+  markAsRead,
+} from "@/lib/api";
+
 export default function SocketProvider({
   children,
 }: {
@@ -80,6 +85,19 @@ export default function SocketProvider({
           );
 
           publish(message);
+
+          // If I'm currently viewing this chat and
+          // someone else sent the message,
+          // immediately mark it delivered & read.
+          if (
+            selectedConversation &&
+            selectedConversation.id ===
+              message.conversation_id &&
+            message.sender_id !== currentUser?.id
+          ) {
+            markAsDelivered(message.id);
+            markAsRead(message.id);
+          }
 
           if (
             !selectedConversation ||
