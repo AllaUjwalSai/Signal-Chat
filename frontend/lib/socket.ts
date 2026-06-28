@@ -11,8 +11,12 @@ export function connectSocket(
     return socket;
   }
 
+  const wsBase =
+    process.env.NEXT_PUBLIC_WS_URL ??
+    "ws://127.0.0.1:8000";
+
   socket = new WebSocket(
-    `ws://127.0.0.1:8000/ws/${userId}`
+    `${wsBase}/ws/${userId}`
   );
 
   socket.onopen = () => {
