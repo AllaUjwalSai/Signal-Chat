@@ -2,6 +2,10 @@
 
 A full-stack real-time messaging application inspired by Signal Messenger, built using Next.js, FastAPI, SQLite, and WebSockets. The project recreates Signal's core messaging experience, including one-to-one chats, group conversations, typing indicators, delivery/read receipts, online presence, dark mode, emoji support, and a modern chat interface.
 
+## Deployment Notice
+
+This application is hosted using the **free tiers of Vercel and Render**. If the backend has been idle, the initial request may take **1–3 minutes** while the Render service starts. Once awake, the application behaves normally.
+
 ## Features
 
 ### Authentication
