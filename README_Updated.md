@@ -63,8 +63,7 @@ A full-stack real-time messaging application inspired by Signal Messenger, built
 
 ## Project Structure
 
-
-
+```
 Signal-Chat/
 │
 ├── frontend/
@@ -88,7 +87,9 @@ Signal-Chat/
 │   └── requirements.txt
 │
 └── README.md
+```
 
+---
 
 ## Database Design
 
