@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.database import Base, engine
 
+from app.seed import seed_database
+
 # Models
 from app.models.user import User
 from app.models.conversation import Conversation
@@ -70,3 +72,7 @@ def root():
     return {
         "message": "🚀 Signal Clone Backend Running"
     }
+
+@app.on_event("startup")
+async def startup():
+    seed_database()
